@@ -6,6 +6,7 @@ import JavaMazeGame.Item.DamageItems;
 public class Sword extends DamageItems {
     public Sword(){
         this.name = MyConstants.SWORD;
-        this.weight = 1;
+        this.weight = 5;
+        this.attackDamage = MyConstants.SWORD_BASE_DAMAGE;
     }
 }

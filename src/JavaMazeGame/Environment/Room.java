@@ -3,6 +3,8 @@ package JavaMazeGame.Environment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import JavaMazeGame.Entity.Zombie;
 import JavaMazeGame.Item.Item;
 
 public class Room {
@@ -10,7 +12,8 @@ public class Room {
     private int numberOfDoors;
     private Door[] doors;
     private List<String> pastRoomNames;
-    private Item item;
+    private Item item = null;
+    private Zombie zombie = null;
 
     public Room() {
         init();
@@ -25,6 +28,10 @@ public class Room {
 
     public Door[] getDoors(){
         return this.doors;
+    }
+
+    public Zombie getZombie() {
+        return zombie;
     }
 
     public String getName() {
@@ -46,9 +53,17 @@ public class Room {
     private void init(){
         Random rand = new Random();
         numberOfDoors = rand.nextInt(3) + 1;
-        int itemId = rand.nextInt(3) + 1;
-
         doors = new Door[numberOfDoors];
+
+        int generateZombieOrItem = rand.nextInt(3) + 1;
+
+        if (generateZombieOrItem == 1 && pastRoomNames != null){
+            zombie = new Zombie();
+        }
+        else {
+            int itemId = rand.nextInt(3) + 1;
+            item = Item.parseItem(itemId);
+        }
 
         if (pastRoomNames == null){
             pastRoomNames = new ArrayList();
@@ -60,11 +75,17 @@ public class Room {
 
         for (int i = 0; i < numberOfDoors; i++) {
             doors[i] = new Door();
+
+            if (i == 0){
+                doors[i].setDestroyable(false);
+            }
+            else {
+                doors[i].setDestroyable(rand.nextBoolean());
+            }
+
             doors[i].setDoorLocation(generateDoorLocation());
             doors[i].setName(generateRoomName());
         }
-
-        item = Item.parseItem(itemId);
     }
 
     private String generateRoomName() {

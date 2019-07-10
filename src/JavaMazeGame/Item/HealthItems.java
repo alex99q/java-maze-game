@@ -1,7 +1,6 @@
 package JavaMazeGame.Item;
 
 public class HealthItems extends Item {
-    protected int healingPower;
 
     @Override
     public String getName() {

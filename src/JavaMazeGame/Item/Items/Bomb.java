@@ -6,6 +6,6 @@ import JavaMazeGame.Item.DamageItems;
 public class Bomb extends DamageItems {
     public Bomb(){
         this.name = MyConstants.BOMB;
-        this.weight = 2;
+        this.weight = 5;
     }
 }

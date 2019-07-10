@@ -3,10 +3,18 @@ package JavaMazeGame.Environment;
 public class Door {
     private String name;
     private int doorLocation;
-    private boolean isLocked;
+    private boolean isDestroyable;
 
     public void setName (String name){
         this.name = name;
+    }
+
+    public boolean isDestroyable() {
+        return isDestroyable;
+    }
+
+    public void setDestroyable(boolean destroyable) {
+        isDestroyable = destroyable;
     }
 
     public String getName (){

@@ -6,7 +6,7 @@ import static JavaMazeGame.Constants.MyConstants.*;
 
 public class InputHandler {
     private static Scanner scanner = new Scanner(System.in);
-    private static final String[] ALLOWED_ONE_ARGUMENT_COMMANDS = {HELP_COMMAND, LOCATION_COMMAND, ITEMS_COMMAND, QUIT_COMMAND};
+    private static final String[] ALLOWED_ONE_ARGUMENT_COMMANDS = {HELP_COMMAND, LOCATION_COMMAND, ITEMS_COMMAND, HEAL_COMMAND, QUIT_COMMAND};
     private static final String[] ALLOWED_TWO_ARGUMENT_COMMANDS = {DROP_ITEM_COMMAND};
     private static final String[] ALLOWED_THREE_ARGUMENT_COMMANDS = {GOTO_COMMAND, PICK_UP_ITEM_COMMAND};
 
@@ -35,7 +35,7 @@ public class InputHandler {
             argumentsStartIndex = 2;
         }
         else {
-            InputExecutor.executeCommand(INVALID_COMMAND);
+            InputExecutor.executeCommand(INVALID_COMMAND, "Not a valid command.\n");
         }
 
         for (int i = argumentsStartIndex; i < inputTokens.length; i++){
@@ -44,7 +44,7 @@ public class InputHandler {
         InputExecutor.executeCommand(commandToCheck, commandArguments.toString());
     }
 
-    private static int typeOfCommand(String command){
+    private static int typeOfCommand(String command){ // returns a number from 0 to 3 based on how many arguments are in a command
         if (Arrays.asList(ALLOWED_ONE_ARGUMENT_COMMANDS).contains(command.toLowerCase())){
             return 1;
         }
